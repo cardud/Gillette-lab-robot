@@ -21,14 +21,12 @@ def get_limits(color):
 
     return lowerLimit, upperLimit
 
-def detect(mask):
-    count = np.sum(np.nonzero(mask))
-  
-    print("count =",count)
-    if count == 0:
-        print("Not Red")
-    else:
-        print("Red")
-
-    print("")
+def detect(window,LL,UL,name):
+    height, width, channels = window.shape
+    hsv = cv2.cvtColor(window, cv2.COLOR_BGR2HSV_FULL)
+    name = cv2.inRange(hsv, LL, UL)
+    ones = cv2.countNonZero(mask)
+    percent_color = (ones/(height*width)) * 100
+    print("Non Zeros Pixels:{:d} and Area Percentage:{:.2f}".format(ones,percent_color))
+    cv2.imshow("mask", name)
 
